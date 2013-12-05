@@ -1,4 +1,4 @@
-#API Reference for Resolution Tube
+#API Reference for qUP
 This is the `/v1/` API documentation for the resolution mobile API. All requests are RESTful and all request & response bodies are `json` formatted.
 
 *	[Login User](#loginuser)
