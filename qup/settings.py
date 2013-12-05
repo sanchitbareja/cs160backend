@@ -74,13 +74,8 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-DATABASES = {'default': dj_database_url.config()}
 
-try:
-    from qup.settings_local import DATABASES
-except Exception:
-    pass
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
