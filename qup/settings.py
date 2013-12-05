@@ -107,6 +107,18 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/var/www/example.com/media/"
+MEDIA_ROOT = 'media'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://example.com/media/", "http://media.example.com/"
+MEDIA_URL = "/media/"
+
+import posixpath
+ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
+
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json']
 API_LIMIT_PER_PAGE = 20
