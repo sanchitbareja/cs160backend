@@ -9,4 +9,4 @@ class Queue(models.Model):
 	time_entered_in_queue = models.DateTimeField(auto_now = False, auto_now_add = True)
 
 	def __unicode__(self):
-		return self.user + ":" + self.business
+		return str(self.user) + ":" + str(self.business)

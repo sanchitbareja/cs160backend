@@ -1,3 +1,9 @@
 from django.contrib import admin
+from business.models import Business
 
-# Register your models here.
+#register the admin site
+
+class BusinessAdmin(admin.ModelAdmin):
+	list_display = ['id','name','lat','lng','avg_wait_time','organization_type']
+
+admin.site.register(Business,BusinessAdmin)

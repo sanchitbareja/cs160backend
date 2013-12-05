@@ -22,7 +22,7 @@ class UserResource(ModelResource):
         queryset = User.objects.all()
         resource_name = 'users'
         # Add it here.
-        # authentication = BasicAuthentication()
+        authentication = BasicAuthentication()
         authorization = DjangoAuthorization()
 
         allowed_methods = ['get']
@@ -56,10 +56,11 @@ class BusinessResource(ModelResource):
         authorization = DjangoAuthorization()
         always_return_data = False
         allowed_methods = ['get']
-        filtering = {}
-
-    def build_filters(self, filters=None):
-        pass
+        filtering = {
+            'lat' : ALL,
+            'lng': ALL,
+            'organization_type': ('exact',),
+        }
 
     def dehydrate(self, bundle):
         """
@@ -70,7 +71,7 @@ class BusinessResource(ModelResource):
 
     def alter_list_data_to_serialize(self, request, data):
         # rename "objects" to "response"
-        data['response'] = {"favorites":data['objects']}
+        data['response'] = {"businesses":data['objects']}
         del(data['objects'])
         return data
 
@@ -86,13 +87,12 @@ class CouponResource(ModelResource):
         # authentication = BasicAuthentication()
         authorization = DjangoAuthorization()
         always_return_data = False
-        allowed_methods = ['get','post','put','delete']
+        allowed_methods = ['get','post']
         filtering = {
-            "user": ("exact")
+            'start': ALL,
+            'end': ALL,
+            'business': ALL
         }
-
-    def build_filters(self, filters=None):
-        pass
 
     def dehydrate(self, bundle):
         """
@@ -103,19 +103,18 @@ class CouponResource(ModelResource):
 
     def obj_create(self, bundle, **kwargs):
         """
-        Posts a new business
+        Posts a new coupon
         """
-        pass
-
-    def obj_update(self, bundle, **kwargs):
-        """
-        Updates an existing favorite
-        """
-        pass
+        business = Business.objects.get(id=bundle.data["business"])
+        message = bundle.data['message']
+        new_coupon = Coupon(message=message, business=business)
+        new_coupon.save()
+        bundle.obj = new_coupon
+        return bundle
         
     def alter_list_data_to_serialize(self, request, data):
         # rename "objects" to "response"
-        data['response'] = {"favorites":data['objects']}
+        data['response'] = {"coupons":data['objects']}
         del(data['objects'])
         return data
 
@@ -133,10 +132,10 @@ class QueueResource(ModelResource):
         authorization = DjangoAuthorization()
         always_return_data = False
         allowed_methods = ['get','post','delete']
-        filtering = {}
-
-    def build_filters(self, filters=None):
-        pass
+        filtering = {
+            "user": ALL,
+            "business": ALL,
+        }
 
     def dehydrate(self, bundle):
         """
@@ -149,17 +148,16 @@ class QueueResource(ModelResource):
         """
         Posts a new business
         """
-        pass
-
-    def obj_update(self, bundle, **kwargs):
-        """
-        Updates an existing favorite
-        """
-        pass
+        user = User.objects.get(id=bundle.data['user'])
+        business = Business.objects.get(id=bundle.data['business'])
+        new_queue_entry = Queue(user=user, business=business)
+        new_queue_entry.save()
+        bundle.obj = new_queue_entry
+        return bundle
         
     def alter_list_data_to_serialize(self, request, data):
         # rename "objects" to "response"
-        data['response'] = {"favorites":data['objects']}
+        data['response'] = {"queues":data['objects']}
         del(data['objects'])
         return data
 
