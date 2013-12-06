@@ -4,9 +4,9 @@ from users.models import User
 
 # Create your models here.
 class Queue(models.Model):
-	user = models.ForeignKey(User, blank = True, null = True)
-	business = models.ForeignKey(Business, blank = True, null = True)
-	time_entered_in_queue = models.DateTimeField(auto_now = False, auto_now_add = True)
+    user = models.ForeignKey(User, blank=True, null=True)
+    business = models.ForeignKey(Business, blank=True, null=True)
+    time_entered_in_queue = models.DateTimeField(auto_now=False, auto_now_add=True)
 
-	def __unicode__(self):
-		return str(self.user) + ":" + str(self.business)
+    def __unicode__(self):
+        return str(self.user) + ":" + str(self.business)
