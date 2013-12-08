@@ -20,9 +20,10 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'qup.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    (r'^admin/', include('smuggler.urls')), # put it before admin url patterns
     url(r'^admin/', include(admin.site.urls)),
 
     # v1 API
     url(r'^api/', include(v1_api.urls)),
 )  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
