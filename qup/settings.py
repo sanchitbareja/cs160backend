@@ -26,7 +26,13 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+import dj_database_url
+DATABASES = {'default': dj_database_url.config()}
 
+try:
+    from qup.settings_local import DATABASES
+except Exception:
+    pass
 # Application definition
 
 INSTALLED_APPS = (
