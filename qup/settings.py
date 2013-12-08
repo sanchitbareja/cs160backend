@@ -26,13 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-import dj_database_url
-DATABASES = {'default': dj_database_url.config()}
 
-try:
-    from qup.settings_local import DATABASES
-except Exception:
-    pass
 # Application definition
 
 INSTALLED_APPS = (
@@ -68,6 +62,19 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'qup.urls'
 
 WSGI_APPLICATION = 'qup.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
 
 
 # Internationalization
