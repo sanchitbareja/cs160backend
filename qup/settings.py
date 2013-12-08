@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'tastypie',
     'debug_toolbar',
     'django_extensions',
-    'smuggler',
 
     # local apps
     'users',
