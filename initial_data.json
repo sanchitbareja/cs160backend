@@ -188,15 +188,6 @@
         }
     },
     {
-        "pk": 9,
-        "model": "south.migrationhistory",
-        "fields": {
-            "applied": "2013-12-05T17:50:59.995Z",
-            "app_name": "business",
-            "migration": "0001_initial"
-        }
-    },
-    {
         "pk": 1,
         "model": "business.business",
         "fields": {
