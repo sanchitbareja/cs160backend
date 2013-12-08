@@ -60,6 +60,7 @@ class BusinessResource(ModelResource):
             'lat' : ALL,
             'lng': ALL,
             'organization_type': ('exact',),
+            'organization_subtype': ('exact', 'startswith'),
         }
 
     def dehydrate(self, bundle):
